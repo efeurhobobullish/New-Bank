@@ -1,36 +1,90 @@
+import React from 'react';
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen bg-[#00C685] font-sans px-4">
-      
-      {/* Middle Section: Logo and Main Text */}
-      <div className="flex-1 flex flex-col items-center justify-center w-full">
+    <div style={styles.container}>
+      {/* Center Content */}
+      <div style={styles.centerContent}>
         
-        {/* Logo Container - White circular background */}
-        <div className="bg-white rounded-full p-1 mb-5 shadow-sm">
+        {/* White Circle Background for Logo */}
+        <div style={styles.logoWrapper}>
           <img 
             src="/logo.png" 
             alt="Logo" 
-            className="w-16 h-16 object-contain rounded-full" 
+            style={styles.logo} 
           />
         </div>
 
-        {/* Main Text */}
-        <h1 className="text-[#181E6B] font-bold text-xl tracking-wide">
-          We are Beyond Banking
-        </h1>
+        <h1 style={styles.tagline}>We are Beyond Banking</h1>
       </div>
 
-      {/* Bottom Section: License/Footer Image */}
-      <div className="mb-12 w-full flex justify-center">
+      {/* Bottom Footer */}
+      <div style={styles.bottomContainer}>
         <img 
           src="/bottom.png" 
-          alt="Licensed by the CBN and insured by the NDIC" 
-          className="h-6 object-contain sm:h-8" 
+          alt="License and Insurance" 
+          style={styles.bottomImage} 
         />
       </div>
     </div>
   );
+};
+
+// CSS Styles Object
+const styles: { [key: string]: React.CSSProperties } = {
+  container: {
+    height: '100vh',
+    width: '100%',
+    backgroundColor: '#00c06d', // The green background
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    fontFamily: 'Arial, sans-serif',
+    margin: 0,
+    padding: 0,
+    boxSizing: 'border-box',
+  },
+  centerContent: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logoWrapper: {
+    backgroundColor: 'white',
+    borderRadius: '50%', // Makes it a circle
+    width: '100px',       // Fixed size for the white circle
+    height: '100px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: '20px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)', // Optional shadow for depth
+  },
+  logo: {
+    width: '60px',
+    height: 'auto',
+  },
+  tagline: {
+    color: '#1B1F4F', // Dark Indigo color
+    fontSize: '24px',
+    fontWeight: 'bold',
+    margin: 0,
+    textAlign: 'center',
+  },
+  bottomContainer: {
+    paddingBottom: '40px',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  bottomImage: {
+    maxWidth: '80%', // Responsive width
+    height: 'auto',
+    maxHeight: '60px',
+  },
 };
 
 export default Home;
