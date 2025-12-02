@@ -1,15 +1,16 @@
+import React, { useState } from 'react';
 import {
   Bell,
   ScanLine,
-  HelpCircle,
+  Headphones, // Changed HelpCircle to Headphones for the "Support" icon
   Eye,
   EyeOff,
   ChevronRight,
   ArrowUp,
   Send,
-  Banknote,
+  Landmark, // Better for "To Bank"
   Download,
-  Phone,
+  Smartphone, // Better for "Airtime"
   Wifi,
   CircleDollarSign,
   Tv,
@@ -26,163 +27,179 @@ import {
   Briefcase
 } from 'lucide-react';
 
+// --- Helper Components ---
 
-// Helper component for Service Grid Items
-const ServiceItem = ({ icon: Icon, label, color, badge }: any) => (
-  <div className="flex flex-col items-center gap-2 relative cursor-pointer group">
-    <div className={`w-12 h-12 ${color} rounded-full center text-white transition-transform group-hover:scale-105`}>
-      <Icon size={24} />
+// Grid Item for Services (Airtime, Data, etc.)
+const ServiceItem = ({ icon: Icon, label, badge }: { icon: any, label: string, badge?: string }) => (
+  <div className="flex flex-col items-center gap-2 relative cursor-pointer active:scale-95 transition-transform">
+    <div className="w-10 h-10 center text-primary bg-secondary/50 rounded-full mb-1">
+      <Icon size={24} strokeWidth={2} />
     </div>
-    <span className="text-[13px] text-main font-medium">{label}</span>
+    <span className="text-[12px] text-main font-medium">{label}</span>
     {badge && (
-      <div className="absolute -top-2 -right-1 bg-[#FF4D4F] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white z-10">
+      <div className="absolute -top-1 -right-2 bg-[#FF4D4F] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-bl-lg rounded-tr-lg z-10">
         {badge}
       </div>
     )}
   </div>
 );
 
-// Helper component for Bottom Nav Items
-const NavItem = ({ icon: Icon, label, active }: any) => (
-  <div className={`flex flex-col items-center gap-1 cursor-pointer ${active ? 'text-primary' : 'text-muted hover:text-main'}`}>
-    <Icon size={24} strokeWidth={active ? 2.5 : 2} />
-    <span className="text-[11px] font-medium">{label}</span>
+// Quick Action Item (To Opay, To Bank, Withdraw)
+const QuickAction = ({ icon: Icon, label }: { icon: any, label: string }) => (
+  <div className="flex flex-col items-center gap-2 cursor-pointer active:opacity-70 transition-opacity">
+    <div className="w-12 h-12 bg-secondary rounded-2xl center text-primary shadow-sm">
+      <Icon size={24} strokeWidth={2.5} />
+    </div>
+    <span className="text-[13px] text-main font-medium">{label}</span>
   </div>
 );
+
+// Bottom Navigation Item
+const NavItem = ({ icon: Icon, label, active }: { icon: any, label: string, active?: boolean }) => (
+  <div className={`flex flex-col items-center gap-1 cursor-pointer ${active ? 'text-primary' : 'text-muted hover:text-main'}`}>
+    <Icon size={24} strokeWidth={active ? 2.5 : 2} />
+    <span className={`text-[10px] font-medium ${active ? 'font-bold' : ''}`}>{label}</span>
+  </div>
+);
+
+// --- Main Component ---
 
 export default function Dashboard() {
   const [showBalance, setShowBalance] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] font-sans pb-24">
-      {/* Main Layout Container */}
+    <div className="min-h-screen bg-[#F2F4F7] font-sans pb-28">
+      {/* Container limited to mobile width on desktop */}
       <div className="layout px-4 pt-4 space-y-4">
         
-        {/* Top App Bar */}
+        {/* 1. Header Section */}
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gray-300 overflow-hidden border-2 border-white shadow-sm">
-              <img src="https://i.pravatar.cc/150?img=3" alt="Profile" className="w-full h-full object-cover" />
+            <div className="w-9 h-9 rounded-full bg-gray-300 overflow-hidden border border-line">
+              {/* Placeholder Avatar */}
+              <img src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="User" className="w-full h-full object-cover" />
             </div>
-            <span className="text-main font-bold text-lg">HI, BULLISH</span>
+            <span className="text-main font-bold text-[15px]">HI, BULLISH</span>
           </div>
           <div className="flex items-center gap-5 text-main">
-            <HelpCircle size={24} className="cursor-pointer hover:text-primary transition-colors" />
-            <ScanLine size={24} className="cursor-pointer hover:text-primary transition-colors" />
-            <Bell size={24} className="cursor-pointer hover:text-primary transition-colors" />
+            <Headphones size={22} className="cursor-pointer" />
+            <ScanLine size={22} className="cursor-pointer" />
+            <Bell size={22} className="cursor-pointer" />
           </div>
         </div>
 
-        {/* Balance Card */}
-        <div className="bg-primary p-5 rounded-2xl text-white shadow-md shadow-primary/20">
-          <div className="flex items-center justify-between mb-4">
+        {/* 2. Green Balance Card */}
+        <div className="bg-primary p-5 rounded-[20px] text-white shadow-lg shadow-primary/20 relative overflow-hidden">
+          {/* Top Row: Available Balance Label */}
+          <div className="flex items-center justify-between mb-3 z-10 relative">
             <div className="flex items-center gap-2 text-sm font-medium opacity-90">
-              <ShieldCheck size={16} />
+              <ShieldCheck size={14} />
               <span>Available Balance</span>
-              <button onClick={() => setShowBalance(!showBalance)} className="cursor-pointer hover:opacity-70">
-                {showBalance ? <Eye size={18} /> : <EyeOff size={18} />}
+              <button onClick={() => setShowBalance(!showBalance)} className="cursor-pointer hover:opacity-80 ml-1">
+                {showBalance ? <Eye size={16} /> : <EyeOff size={16} />}
               </button>
             </div>
-            <div className="flex items-center gap-1 text-sm font-medium cursor-pointer hover:opacity-80">
+            <div className="flex items-center gap-1 text-[11px] font-medium bg-white/20 px-2 py-1 rounded-md cursor-pointer hover:bg-white/30 transition-colors">
               <span>Transaction History</span>
-              <ChevronRight size={16} />
+              <ChevronRight size={12} />
             </div>
           </div>
-          <div className="flex items-center justify-between">
+
+          {/* Middle Row: Amount & Button */}
+          <div className="flex items-center justify-between z-10 relative">
             <div className="flex items-center gap-2">
-              <span className="text-3xl font-bold tracking-wider">
+              <span className="text-2xl font-bold tracking-tight">
                 {showBalance ? '₦125,400.50' : '₦*******'}
               </span>
-              <ChevronRight size={20} className="opacity-80" />
+              <ChevronRight size={18} className="opacity-70" />
             </div>
-            <button className="btn btn-secondary text-sm py-2 px-5 shadow-sm">
+            <button className="bg-white text-primary text-[13px] font-bold py-1.5 px-4 rounded-full shadow-sm active:scale-95 transition-transform">
               + Add Money
             </button>
           </div>
         </div>
 
-        {/* BizPayment Banner */}
-        <div className="bg-secondary p-3 rounded-xl flex items-center justify-between cursor-pointer hover:opacity-90 transition-opacity">
-          <div className="flex items-center gap-2 text-primary font-medium text-sm">
-            <Briefcase size={18} />
-            <span>BizPayment: today received</span>
-            <span className="font-bold">₦0.00</span>
+        {/* 3. BizPayment Banner (Slim) */}
+        <div className="bg-white px-4 py-3 rounded-xl flex items-center justify-between shadow-sm cursor-pointer">
+          <div className="flex items-center gap-2 text-main text-[13px]">
+            <Briefcase size={16} className="text-primary" />
+            <span className="text-muted">BizPayment: today received</span>
+            <span className="font-bold text-main">₦0.00</span>
           </div>
-          <ChevronRight size={18} className="text-primary" />
+          <ChevronRight size={16} className="text-muted" />
         </div>
 
-        {/* Recent Transactions */}
-        <div className="bg-white p-4 rounded-2xl shadow-sm">
-          <div className="flex flex-col gap-4">
-            {[1, 2].map((_, i) => (
-              <div key={i} className="flex items-center justify-between border-b border-line/40 last:border-0 pb-3 last:pb-0">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-secondary rounded-full center text-primary">
-                    <ArrowUp size={20} />
-                  </div>
-                  <span className="text-main font-medium">Transaction</span>
+        {/* 4. Recent Transactions (White Card) */}
+        <div className="bg-white px-4 py-2 rounded-2xl shadow-sm">
+          {[1, 2].map((_, i) => (
+            <div key={i} className="flex items-center justify-between py-3 border-b border-line/30 last:border-0">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-secondary rounded-full center text-primary">
+                  <ArrowUp size={16} strokeWidth={2.5} />
                 </div>
-                <div className="text-right">
-                  <div className="text-main font-bold">₦0.00</div>
-                  <div className="text-primary text-xs font-medium">Successful</div>
-                </div>
+                <span className="text-main text-[13px] font-medium">Transaction</span>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="bg-white p-5 rounded-2xl shadow-sm grid grid-cols-3 gap-2">
-          <ServiceItem icon={Send} label="To Opay" color="bg-green-500" />
-          <ServiceItem icon={Banknote} label="To Bank" color="bg-blue-500" />
-          <ServiceItem icon={Download} label="Withdraw" color="bg-red-500" />
-        </div>
-
-        {/* Services Grid */}
-        <div className="bg-white p-5 rounded-2xl shadow-sm grid grid-cols-4 gap-y-6 gap-x-2">
-          <ServiceItem icon={Phone} label="Airtime" color="bg-green-500" badge="Up to 6%" />
-          <ServiceItem icon={Wifi} label="Data" color="bg-green-500" badge="Up to 6%" />
-          <ServiceItem icon={CircleDollarSign} label="Betting" color="bg-green-500" badge="Up to 10%" />
-          <ServiceItem icon={Tv} label="TV" color="bg-green-500" />
-          <ServiceItem icon={Vault} label="Safebox" color="bg-green-500" />
-          <ServiceItem icon={HandCoins} label="Loan" color="bg-green-500" badge="Hot" />
-          <ServiceItem icon={CalendarCheck} label="Check-in" color="bg-green-500" />
-          <ServiceItem icon={Grid} label="More" color="bg-green-500" />
-        </div>
-
-        {/* Special Bonus Section */}
-        <div className="bg-white p-4 rounded-2xl shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-main font-bold text-lg flex items-center gap-2">
-              Special Bonus For Your
-              <Gift className="text-purple-500" size={20} />
-            </h3>
-            <ChevronRight size={20} className="text-muted" />
-          </div>
-          <div className="bg-secondary/30 p-4 rounded-xl flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img src="/api/placeholder/60/60" alt="Gift" className="w-14 h-14 object-contain" />
-              <div>
-                <h4 className="text-main font-bold">Claim Your Rewards🎁</h4>
-                <p className="text-muted text-sm">Grab FREE coupons & cashbacks!</p>
+              <div className="text-right">
+                <div className="text-main font-bold text-[13px]">₦0.00</div>
+                <div className="text-primary text-[10px] font-medium bg-secondary px-1.5 py-0.5 rounded text-center inline-block mt-0.5">Successful</div>
               </div>
             </div>
-            <button className="btn btn-primary py-2 px-6 text-sm rounded-full">
-              GO
-            </button>
+          ))}
+        </div>
+
+        {/* 5. Main Action Row (To Opay, To Bank, Withdraw) */}
+        <div className="bg-white p-5 rounded-2xl shadow-sm grid grid-cols-3 gap-4">
+          <QuickAction icon={Send} label="To Opay" />
+          <QuickAction icon={Landmark} label="To Bank" />
+          <QuickAction icon={Download} label="Withdraw" />
+        </div>
+
+        {/* 6. Services Grid */}
+        <div className="bg-white p-5 rounded-2xl shadow-sm">
+          <div className="grid grid-cols-4 gap-y-6 gap-x-2">
+            <ServiceItem icon={Smartphone} label="Airtime" badge="Up to 6%" />
+            <ServiceItem icon={Wifi} label="Data" badge="Up to 6%" />
+            <ServiceItem icon={CircleDollarSign} label="Betting" badge="Up to 10%" />
+            <ServiceItem icon={Tv} label="TV" />
+            
+            <ServiceItem icon={Vault} label="Safebox" />
+            <ServiceItem icon={HandCoins} label="Loan" badge="Hot" />
+            <ServiceItem icon={CalendarCheck} label="Check-in" />
+            <ServiceItem icon={Grid} label="More" />
           </div>
         </div>
 
-        {/* Hot Deal Banner */}
+        {/* 7. Special Bonus Banner */}
+        <div className="bg-gradient-to-r from-[#E6F9F1] to-[#FFF5F5] p-4 rounded-2xl shadow-sm relative overflow-hidden">
+           <div className="flex items-center justify-between mb-2">
+             <span className="text-main font-bold text-sm">Special Bonus For Your</span>
+             <Gift size={16} className="text-purple-500" />
+           </div>
+           
+           <div className="bg-white/60 backdrop-blur-sm p-3 rounded-xl flex items-center justify-between border border-white/50">
+             <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg center">
+                  <Gift size={20} className="text-blue-500" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-main font-bold text-[13px]">Claim Your Rewards🎁</span>
+                  <span className="text-muted text-[10px]">Grab FREE coupons</span>
+                </div>
+             </div>
+             <button className="bg-primary text-white text-[12px] font-bold px-5 py-2 rounded-full shadow-md">
+               GO
+             </button>
+           </div>
+        </div>
+
+        {/* 8. Hot Deal Section */}
         <div className="bg-white p-4 rounded-2xl shadow-sm flex items-center gap-4">
-          <div className="w-14 h-14 shrink-0">
-            <img src="/api/placeholder/60/60" alt="Deal" className="w-full h-full object-contain" />
+          <div className="w-10 h-10 bg-yellow-100 rounded-full center shrink-0">
+             <span className="text-xl">⚽</span>
           </div>
-          <div>
-            <h4 className="text-main font-bold flex items-center gap-2">
-              Hot Deal Just for You!
-            </h4>
-            <p className="text-muted text-sm">
+          <div className="flex flex-col">
+            <h4 className="text-main font-bold text-[13px]">Hot Deal Just for You!</h4>
+            <p className="text-muted text-[11px]">
               Deposit <span className="line-through">₦100</span>-₦1,000, Get ₦100 Instantly!
             </p>
           </div>
@@ -190,8 +207,8 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-line py-3 z-50">
+      {/* --- Bottom Navigation Fixed --- */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-line py-3 z-50 pb-5">
         <div className="layout flex items-center justify-around">
           <NavItem icon={Home} label="Home" active />
           <NavItem icon={Gift} label="Rewards" />
