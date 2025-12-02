@@ -1,87 +1,35 @@
-// Home.tsx
 import React from 'react';
 
-const Home: React.FC = () => {
+const Home = () => {
   return (
-    <div style={{
-      width: '100%',
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      margin: 0,
-      padding: 0,
-      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif"
-    }}>
-      {/* Header with Logo */}
-      <header style={{
-        padding: '20px',
-        borderBottom: '1px solid #eee'
-      }}>
-        <div style={{ height: '40px' }}>
+    <div className="flex flex-col items-center justify-between min-h-screen bg-[#00C685] font-sans px-4">
+      
+      {/* Middle Section: Logo and Main Text */}
+      <div className="flex-1 flex flex-col items-center justify-center w-full">
+        
+        {/* Logo Container - White circular background */}
+        <div className="bg-white rounded-full p-1 mb-5 shadow-sm">
           <img 
             src="/logo.png" 
-            alt="Beyond Banking Logo" 
-            style={{ height: '100%', width: 'auto' }}
+            alt="Logo" 
+            className="w-16 h-16 object-contain rounded-full" 
           />
         </div>
-      </header>
 
-      {/* Main Content */}
-      <main style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px',
-        textAlign: 'center'
-      }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          marginBottom: '60px',
-          fontSize: '24px',
-          color: '#333'
-        }}>
-          <span style={{ fontWeight: '500' }}>webtech.net.ng</span>
-          <span style={{ margin: '0 5px', color: '#666' }}>/</span>
-          <span style={{ fontWeight: '600', color: '#1a5fb4' }}>OPa</span>
-        </div>
-        
-        <h1 style={{
-          fontSize: '48px',
-          fontWeight: '700',
-          color: '#111',
-          marginBottom: '60px',
-          lineHeight: '1.2'
-        }}>
+        {/* Main Text */}
+        <h1 className="text-[#181E6B] font-bold text-xl tracking-wide">
           We are Beyond Banking
         </h1>
-        
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '15px'
-        }}>
-          <div>
-            <span style={{
-              fontSize: '18px',
-              color: '#555',
-              lineHeight: '1.5'
-            }}>
-              Licensed by the CBN and insured by the
-            </span>
-          </div>
-          <div>
-            <img 
-              src="/bottom.png" 
-              alt="NDIC Logo" 
-              style={{ height: '40px', width: 'auto' }}
-            />
-          </div>
-        </div>
-      </main>
+      </div>
+
+      {/* Bottom Section: License/Footer Image */}
+      <div className="mb-12 w-full flex justify-center">
+        <img 
+          src="/bottom.png" 
+          alt="Licensed by the CBN and insured by the NDIC" 
+          className="h-6 object-contain sm:h-8" 
+        />
+      </div>
     </div>
   );
 };
