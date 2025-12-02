@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import { ScrollToTop } from "@/components/ui";
 import { Home, Onboarding } from "@/pages";
-import { Signup } from "@/pages/auth";
+import { Signup, Login } from "@/pages/auth";
 import { Dashboard } from "@/pages/main";
 
 export default function App() {
@@ -14,6 +14,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
