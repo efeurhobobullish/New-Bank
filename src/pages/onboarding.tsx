@@ -6,13 +6,13 @@ const Onboarding: React.FC = () => {
 
   // Navigation handlers
   const handleCreateAccount = () => {
-    console.log("Navigate to Create Account");
-    // navigate('/signup'); 
+    // Navigates to the signup route
+    navigate('/signup'); 
   };
 
   const handleLogin = () => {
-    console.log("Navigate to Login");
-    // navigate('/login');
+    // Navigates to the login route
+    navigate('/login');
   };
 
   return (
@@ -190,4 +190,5 @@ const styles: { [key: string]: React.CSSProperties } = {
 };
 
 export default Onboarding;
+
 
