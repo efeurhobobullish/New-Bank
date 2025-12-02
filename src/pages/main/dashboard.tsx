@@ -17,13 +17,11 @@ import {
   LayoutGrid,
   Gift,
   Megaphone,
-  Home,
   Gem,
   TrendingUp,
   CreditCard,
   User,
   ArrowUpRight,
-  RefreshCw,
   Plus
 } from 'lucide-react';
 
@@ -213,4 +211,5 @@ const NavItem = ({ icon, label, active = false }: { icon: React.ReactNode, label
 );
 
 export default Dashboard;
+
 
