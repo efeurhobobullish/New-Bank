@@ -1,7 +1,9 @@
 import { ChevronLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex flex-col items-center">
       {/* Container */}
@@ -9,7 +11,10 @@ export default function Login() {
         
         {/* Header: Back Button */}
         <div className="w-full flex items-center justify-start mb-10">
-          <button className="p-2 -ml-2 hover:bg-line/20 rounded-full transition-colors cursor-pointer text-main">
+          <button 
+            onClick={() => navigate(-1)} 
+            className="p-2 -ml-2 hover:bg-line/20 rounded-full transition-colors cursor-pointer text-main"
+          >
             <ChevronLeft size={32} strokeWidth={2.5} />
           </button>
         </div>
