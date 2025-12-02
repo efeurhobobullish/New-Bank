@@ -1,18 +1,6 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Navigate to onboarding after 3 seconds
-    const timer = setTimeout(() => {
-      navigate('/onboarding'); 
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [navigate]);
-
   return (
     <div style={styles.container}>
       {/* Center Content */}
@@ -42,11 +30,12 @@ const Home: React.FC = () => {
   );
 };
 
+// CSS Styles Object
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     height: '100vh',
     width: '100%',
-    backgroundColor: '#00C675', // UPDATED: Exact vibrant green from image
+    backgroundColor: '#00c06d', // The green background
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -64,26 +53,25 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
   },
   logoWrapper: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: '50%',
-    width: '100px',
+    backgroundColor: 'white',
+    borderRadius: '50%', // Makes it a circle
+    width: '100px',       // Fixed size for the white circle
     height: '100px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: '20px',
-    // Optional: Add a subtle shadow if you want it to pop like the app
-    boxShadow: '0 4px 10px rgba(0,0,0,0.1)', 
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)', // Optional shadow for depth
   },
   logo: {
     width: '60px',
     height: 'auto',
   },
   tagline: {
-    color: '#272D4E', // UPDATED: Exact dark navy from image text
-    fontSize: '22px',
-    fontWeight: '700', // Made text slightly bolder
-    marginTop: '10px',
+    color: '#1B1F4F', // Dark Indigo color
+    fontSize: '24px',
+    fontWeight: 'bold',
+    margin: 0,
     textAlign: 'center',
   },
   bottomContainer: {
@@ -93,7 +81,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     justifyContent: 'center',
   },
   bottomImage: {
-    maxWidth: '80%',
+    maxWidth: '80%', // Responsive width
     height: 'auto',
     maxHeight: '60px',
   },
