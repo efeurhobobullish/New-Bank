@@ -1,69 +1,89 @@
-export default function Home() {
+// Home.tsx
+import React from 'react';
+
+const Home: React.FC = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="w-full py-16 px-6 center flex-col text-center">
-        <img 
-          src="/logo.png" 
-          alt="Logo" 
-          className="w-20 h-20 mb-6 drop-shadow-md"
-        />
-
-        <h1 className="text-4xl md:text-5xl font-extrabold text-primary mb-4">
-          Beyond Banking
-        </h1>
-
-        <p className="text-main text-lg md:text-xl max-w-[520px]">
-          Experience modern digital banking with security, speed and simplicity.
-        </p>
-
-        <div className="mt-8 flex items-center justify-center gap-4">
-          <button className="btn-primary px-6 py-3 rounded-lg">
-            Get Started
-          </button>
-
-          <button className="px-6 py-3 rounded-lg border border-primary text-primary">
-            Learn More
-          </button>
+    <div style={{
+      width: '100%',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      margin: 0,
+      padding: 0,
+      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif"
+    }}>
+      {/* Header with Logo */}
+      <header style={{
+        padding: '20px',
+        borderBottom: '1px solid #eee'
+      }}>
+        <div style={{ height: '40px' }}>
+          <img 
+            src="/logo.png" 
+            alt="Beyond Banking Logo" 
+            style={{ height: '100%', width: 'auto' }}
+          />
         </div>
-      </section>
+      </header>
 
-      {/* Features */}
-      <section className="mt-14 px-6 layout grid gap-6 md:grid-cols-3">
-        {[
-          {
-            title: "Fast Transactions",
-            text: "Seamless transfers, instant notifications and flawless performance.",
-          },
-          {
-            title: "Secure & Smart",
-            text: "Encrypted, insured, and trusted — your money stays protected.",
-          },
-          {
-            title: "24/7 Digital Access",
-            text: "Bank anywhere, anytime with our intelligent digital platform.",
-          },
-        ].map((item, i) => (
-          <div
-            key={i}
-            className="bg-secondary rounded-xl p-6 shadow-sm border border-line"
-          >
-            <h2 className="text-primary font-bold text-xl mb-2">
-              {item.title}
-            </h2>
-            <p className="text-main">{item.text}</p>
+      {/* Main Content */}
+      <main style={{
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+        textAlign: 'center'
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: '60px',
+          fontSize: '24px',
+          color: '#333'
+        }}>
+          <span style={{ fontWeight: '500' }}>webtech.net.ng</span>
+          <span style={{ margin: '0 5px', color: '#666' }}>/</span>
+          <span style={{ fontWeight: '600', color: '#1a5fb4' }}>OPa</span>
+        </div>
+        
+        <h1 style={{
+          fontSize: '48px',
+          fontWeight: '700',
+          color: '#111',
+          marginBottom: '60px',
+          lineHeight: '1.2'
+        }}>
+          We are Beyond Banking
+        </h1>
+        
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '15px'
+        }}>
+          <div>
+            <span style={{
+              fontSize: '18px',
+              color: '#555',
+              lineHeight: '1.5'
+            }}>
+              Licensed by the CBN and insured by the
+            </span>
           </div>
-        ))}
-      </section>
-
-      {/* Footer Licensing Image */}
-      <footer className="w-full center flex-col mt-16 mb-6 text-center">
-        <img
-          src="/bottom.png"
-          alt="Licensing details"
-          className="w-auto h-6 opacity-90"
-        />
-      </footer>
+          <div>
+            <img 
+              src="/bottom.png" 
+              alt="NDIC Logo" 
+              style={{ height: '40px', width: 'auto' }}
+            />
+          </div>
+        </div>
+      </main>
     </div>
   );
-}
+};
+
+export default Home;
