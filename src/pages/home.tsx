@@ -1,6 +1,4 @@
-import React from "react";
-
-const Home = () => {
+export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
@@ -68,6 +66,4 @@ const Home = () => {
       </footer>
     </div>
   );
-};
-
-export default Home;
+}
