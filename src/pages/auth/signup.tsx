@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronDown, CheckSquare, Square } from 'lucide-react';
+import { ChevronLeft, ChevronDown, CheckSquare, Square, Gift, Phone } from 'lucide-react';
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -14,31 +14,34 @@ const Signup: React.FC = () => {
   // Checkbox toggle
   const toggleAgreed = () => setAgreed(!agreed);
 
+  // Checks if phone number is valid length (10 digits after removing leading 0, or just >9 chars)
+  const isPhoneValid = phone.length >= 10;
+
   return (
-    <div className="min-h-screen bg-white font-sans flex flex-col relative">
+    <div className="min-h-screen bg-white font-sans flex flex-col relative max-w-md mx-auto">
       
       {/* ---------------- Header ---------------- */}
-      <div className="flex justify-between items-center p-5 pt-8">
-        <button onClick={() => navigate(-1)} className="text-black">
-          <ChevronLeft size={28} />
+      <div className="flex justify-between items-center px-4 pt-6 pb-2">
+        <button onClick={() => navigate(-1)} className="text-black p-2 -ml-2">
+          <ChevronLeft size={28} strokeWidth={2.5} />
         </button>
-        <span className="text-primary font-bold text-lg cursor-pointer">Help</span>
+        <span className="text-primary font-bold text-base cursor-pointer">Help</span>
       </div>
 
       {/* ---------------- Main Content ---------------- */}
-      <div className="px-6 mt-4 flex-1">
+      <div className="px-5 mt-2 flex-1 flex flex-col">
         
         {/* Title */}
-        <h1 className="text-2xl font-bold text-black mb-8">
+        <h1 className="text-[26px] font-bold text-[#1b1b1b] mb-8 leading-tight">
           Get an OPay Account
         </h1>
 
         {/* Phone Input */}
-        <div className="flex items-center bg-gray-50 rounded-lg p-4 mb-4 border border-transparent focus-within:border-primary transition-colors">
+        <div className="flex items-center bg-[#F5F5F5] rounded-xl px-4 py-4 mb-5 border border-transparent focus-within:border-primary transition-colors">
           {/* Flag & Code */}
-          <div className="flex items-center border-r border-gray-300 pr-3 mr-3">
-            <span className="text-2xl mr-2">🇳🇬</span>
-            <span className="font-bold text-black text-lg">+234</span>
+          <div className="flex items-center pr-3 mr-3 border-r border-gray-300 h-6">
+            <span className="text-2xl mr-2 leading-none">🇳🇬</span>
+            <span className="font-bold text-[#1b1b1b] text-base">+234</span>
           </div>
           
           {/* Input Field */}
@@ -47,79 +50,78 @@ const Signup: React.FC = () => {
             placeholder="Enter your Mobile No."
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="bg-transparent w-full text-lg text-black placeholder-gray-400 focus:outline-none font-medium"
+            className="bg-transparent w-full text-base text-[#1b1b1b] placeholder-gray-400 focus:outline-none font-medium caret-primary"
           />
         </div>
 
         {/* Invitation Code Dropdown */}
         <div 
           onClick={toggleInvite}
-          className="bg-green-50 rounded-lg p-4 flex justify-between items-center cursor-pointer mb-8"
+          className="bg-[#E8F9F0] rounded-xl p-4 flex justify-between items-center cursor-pointer mb-2 active:opacity-90 transition-opacity"
         >
           <div className="flex items-center gap-3">
-            {/* Tiny icon for invite */}
-            <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-               <span className="text-white text-xs">👋</span>
+            {/* Styled Icon Container matching the screenshot's character graphic */}
+            <div className="w-8 h-8 bg-white/60 rounded-full flex items-center justify-center border border-white/50">
+               <Gift size={16} className="text-primary fill-current" />
             </div>
-            <span className="text-gray-600 font-medium text-sm">Have an Invitation Code? (Optional)</span>
+            <span className="text-gray-600 font-medium text-[13px] tracking-wide">Have an Invitation Code? (Optional)</span>
           </div>
-          <ChevronDown size={20} className={`text-gray-500 transition-transform ${showInvite ? 'rotate-180' : ''}`} />
+          <ChevronDown size={20} className={`text-gray-400 transition-transform duration-300 ${showInvite ? 'rotate-180' : ''}`} />
         </div>
 
-        {/* Expanded Invite Input (Hidden by default) */}
-        {showInvite && (
-          <div className="mb-6 animate-in fade-in slide-in-from-top-2 duration-300">
-             <input 
-               type="text" 
-               placeholder="Enter code" 
-               className="w-full bg-gray-50 p-4 rounded-lg focus:border-primary border border-transparent outline-none"
-             />
-          </div>
-        )}
+        {/* Expanded Invite Input (Animated) */}
+        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showInvite ? 'max-h-20 mb-6' : 'max-h-0 mb-0'}`}>
+           <input 
+             type="text" 
+             placeholder="Enter invitation code" 
+             className="w-full bg-[#F5F5F5] p-4 rounded-xl focus:border-primary border border-transparent outline-none text-base mt-2"
+           />
+        </div>
 
         {/* ---------------- Promo Badge & Button Wrapper ---------------- */}
-        <div className="relative mt-8 mb-6">
+        <div className="relative mt-12 mb-6 w-full">
           
           {/* "Get ₦300 airtime" Floating Badge */}
-          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-green-100 text-green-800 text-xs font-bold py-1 px-3 rounded-full flex items-center gap-2 shadow-sm animate-bounce">
-             <span>💸</span> Get ₦300 airtime for free
+          {/* Exact pill shape and color from screenshot */}
+          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-[#E8F9F0] text-primary text-[11px] font-bold py-1.5 px-4 rounded-full flex items-center gap-1.5 shadow-sm whitespace-nowrap z-10">
+             <span className="text-lg">💸</span> Get ₦300 airtime for free
           </div>
 
           {/* NEXT Button */}
           <button 
-            className={`w-full py-4 rounded-full font-bold text-lg text-white shadow-lg transition-all
-              ${phone.length > 9 ? 'bg-primary cursor-pointer hover:opacity-90' : 'bg-green-200 cursor-not-allowed'}
+            className={`w-full py-3.5 rounded-full font-bold text-[16px] text-white transition-all duration-200 shadow-sm
+              ${isPhoneValid ? 'bg-primary cursor-pointer active:scale-[0.98]' : 'bg-[#A6EBC5] cursor-not-allowed'}
             `}
-            disabled={phone.length <= 9}
+            disabled={!isPhoneValid}
           >
             NEXT
           </button>
         </div>
 
         {/* ---------------- Terms & Conditions ---------------- */}
-        <div className="flex items-start gap-3 mb-8">
-          <button onClick={toggleAgreed} className="mt-1 min-w-[20px]">
+        <div className="flex items-start gap-3 px-1 mb-6">
+          <button onClick={toggleAgreed} className="mt-0.5 min-w-[20px] active:scale-90 transition-transform">
             {agreed ? (
-              <CheckSquare size={24} className="text-primary bg-white" />
+              <CheckSquare size={20} className="text-primary bg-white rounded" fill="currentColor" stroke="white" />
             ) : (
-              <Square size={24} className="text-gray-300" />
+              <div className="w-5 h-5 border-2 border-gray-300 rounded-[4px]"></div>
             )}
           </button>
           
-          <p className="text-xs text-gray-500 leading-5">
+          <p className="text-[11px] text-gray-500 leading-tight">
             I have read, understood and agreed to the{' '}
-            <span className="text-primary font-bold">Terms & Conditions</span> and{' '}
-            <span className="text-primary font-bold">Privacy Policy</span>.
+            <span className="text-primary font-bold cursor-pointer">Terms & Conditions</span> and{' '}
+            <span className="text-primary font-bold cursor-pointer">Privacy Policy</span>.
           </p>
         </div>
 
         {/* ---------------- Login Link Footer ---------------- */}
-        <div className="w-full text-center mt-4">
-          <p className="text-gray-600 font-medium">
+        <div className="w-full text-center mt-auto pb-8">
+          <p className="text-[#1b1b1b] font-medium text-sm">
             Already have an OPay Account?{' '}
             <span 
               onClick={() => navigate('/login')} 
-              className="text-primary font-bold cursor-pointer"
+              className="text-primary font-bold cursor-pointer ml-1"
             >
               Log in
             </span>
@@ -132,3 +134,5 @@ const Signup: React.FC = () => {
 };
 
 export default Signup;
+
+
