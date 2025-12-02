@@ -4,25 +4,42 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ------------------------------------------------------
+   BRAND COLORS (Light Mode)
+   ------------------------------------------------------ */
+
 :root {
-  --background: #ffffff;
-  --secondary: #f9f9f9;
-  --foreground: #f5f5f5;
-  --main: #444;
-  --muted: #999999;
-  --primary: #222;
-  --line: #f1f1f1;
+  --background: #00a86b;      /* Main banking green background */
+  --secondary: #00b276;       /* Slightly lighter green for sections */
+  
+  --foreground: #ffffff;      /* White text on green background */
+  --main: #0b2b67;            /* Deep navy primary text color */
+  
+  --muted: #e1f5e8;           /* Soft green/white-muted text */
+  --primary: #ffffff;         /* White (buttons / prominent UI) */
+
+  --line: #0b2b67;            /* Navy for borders / separators */
 }
 
+/* ------------------------------------------------------
+   BRAND COLORS (Dark Mode)
+   ------------------------------------------------------ */
+
 .dark {
-  --background: #0a0a0a;
-  --foreground: #212121;
-  --main: #fefefe;
-  --secondary: #121212;
-  --muted: #999999;
-  --line: #212121;
-  --primary: #fefefe;
+  --background: #0a0f14;      /* Very dark green/black mix */
+  --secondary: #12241b;       /* Dark lifted sections */
+  
+  --foreground: #d8ffe6;      /* Soft greenish white */
+  --main: #9bd4b5;            /* Muted green text */
+  
+  --muted: #557565;           
+  --line: #1f3b2c;
+  --primary: #00d28a;         /* Bright modern glowing green */
 }
+
+/* ------------------------------------------------------
+   Tailwind Theme Bridge
+   ------------------------------------------------------ */
 
 @theme inline {
   --font-sans: "Plus Jakarta Sans", sans-serif;
@@ -35,14 +52,19 @@
   --color-primary: var(--primary);
 }
 
-*{
-  @apply outline-none
+/* ------------------------------------------------------
+   Global Styles
+   ------------------------------------------------------ */
+
+* {
+  @apply outline-none;
 }
 
 body {
- @apply bg-background text-main font-sans;
+  @apply bg-background text-foreground font-sans;
 }
 
+/* Layout helpers */
 .main {
   @apply max-w-[90%] 2xl:max-w-[1280px] mx-auto;
 }
@@ -55,15 +77,17 @@ body {
   @apply flex items-center justify-center;
 }
 
+/* Buttons */
 button,
 .btn {
   @apply cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50;
 }
 
 .btn-primary {
-  @apply text-white dark:text-[#171717] bg-primary font-semibold;
+  @apply bg-primary text-main font-semibold rounded-md px-4 py-2;
 }
 
+/* Hide Scrollbars */
 .hide-scrollbar::-webkit-scrollbar {
   @apply hidden;
 }
@@ -71,4 +95,3 @@ button,
 .hide-scrollbar::-webkit-scrollbar-thumb {
   @apply hidden;
 }
-
