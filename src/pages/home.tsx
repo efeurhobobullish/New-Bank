@@ -5,13 +5,11 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set a timer for 3 seconds (3000 milliseconds)
+    // Navigate to onboarding after 3 seconds
     const timer = setTimeout(() => {
-      navigate('/onboarding'); // Change this to your actual route path
+      navigate('/onboarding'); 
     }, 3000);
 
-    // Cleanup function: clears the timer if the user leaves the page manually
-    // prevents memory leaks
     return () => clearTimeout(timer);
   }, [navigate]);
 
@@ -44,12 +42,11 @@ const Home: React.FC = () => {
   );
 };
 
-// CSS Styles Object
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     height: '100vh',
     width: '100%',
-    backgroundColor: '#00c06d',
+    backgroundColor: '#00C675', // UPDATED: Exact vibrant green from image
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -67,7 +64,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
   },
   logoWrapper: {
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
     borderRadius: '50%',
     width: '100px',
     height: '100px',
@@ -75,17 +72,18 @@ const styles: { [key: string]: React.CSSProperties } = {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: '20px',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    // Optional: Add a subtle shadow if you want it to pop like the app
+    boxShadow: '0 4px 10px rgba(0,0,0,0.1)', 
   },
   logo: {
     width: '60px',
     height: 'auto',
   },
   tagline: {
-    color: '#1B1F4F',
-    fontSize: '24px',
-    fontWeight: 'bold',
-    margin: 0,
+    color: '#272D4E', // UPDATED: Exact dark navy from image text
+    fontSize: '22px',
+    fontWeight: '700', // Made text slightly bolder
+    marginTop: '10px',
     textAlign: 'center',
   },
   bottomContainer: {
