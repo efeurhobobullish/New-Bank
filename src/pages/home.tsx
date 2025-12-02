@@ -1,90 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Navigate to onboarding after 3 seconds
+    const timer = setTimeout(() => {
+      navigate('/onboarding'); 
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
-    <div style={styles.container}>
+    // bg-primary pulls the OPay green from your index.css
+    <div className="h-screen w-full bg-primary flex flex-col justify-between items-center font-sans">
+      
       {/* Center Content */}
-      <div style={styles.centerContent}>
+      <div className="flex-1 flex flex-col justify-center items-center">
         
         {/* White Circle Background for Logo */}
-        <div style={styles.logoWrapper}>
+        <div className="bg-white rounded-full w-[100px] h-[100px] flex justify-center items-center mb-5 shadow-md">
           <img 
             src="/logo.png" 
             alt="Logo" 
-            style={styles.logo} 
+            className="w-[60px] h-auto" 
           />
         </div>
 
-        <h1 style={styles.tagline}>We are Beyond Banking</h1>
+        {/* text-main pulls the Deep Navy color from your index.css */}
+        <h1 className="text-main text-2xl font-bold text-center m-0">
+          We are Beyond Banking
+        </h1>
       </div>
 
       {/* Bottom Footer */}
-      <div style={styles.bottomContainer}>
+      <div className="w-full flex justify-center pb-10">
         <img 
           src="/bottom.png" 
           alt="License and Insurance" 
-          style={styles.bottomImage} 
+          className="max-w-[80%] h-auto max-h-[60px]" 
         />
       </div>
     </div>
   );
 };
 
-// CSS Styles Object
-const styles: { [key: string]: React.CSSProperties } = {
-  container: {
-    height: '100vh',
-    width: '100%',
-    backgroundColor: '#00c06d', // The green background
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    fontFamily: 'Arial, sans-serif',
-    margin: 0,
-    padding: 0,
-    boxSizing: 'border-box',
-  },
-  centerContent: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoWrapper: {
-    backgroundColor: 'white',
-    borderRadius: '50%', // Makes it a circle
-    width: '100px',       // Fixed size for the white circle
-    height: '100px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: '20px',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)', // Optional shadow for depth
-  },
-  logo: {
-    width: '60px',
-    height: 'auto',
-  },
-  tagline: {
-    color: '#1B1F4F', // Dark Indigo color
-    fontSize: '24px',
-    fontWeight: 'bold',
-    margin: 0,
-    textAlign: 'center',
-  },
-  bottomContainer: {
-    paddingBottom: '40px',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  bottomImage: {
-    maxWidth: '80%', // Responsive width
-    height: 'auto',
-    maxHeight: '60px',
-  },
-};
-
 export default Home;
+
