@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronDown, CheckSquare, Square, Gift, Phone } from 'lucide-react';
+import { ChevronLeft, ChevronDown, CheckSquare, Gift } from 'lucide-react';
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
