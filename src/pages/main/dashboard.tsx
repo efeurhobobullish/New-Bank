@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Bell,
   ScanLine,
-  Headphones, // Changed HelpCircle to Headphones for the "Support" icon
+  Headphones,
   Eye,
   EyeOff,
   ChevronRight,
   ArrowUp,
   Send,
-  Landmark, // Better for "To Bank"
+  Landmark,
   Download,
-  Smartphone, // Better for "Airtime"
+  Smartphone,
   Wifi,
   CircleDollarSign,
   Tv,
