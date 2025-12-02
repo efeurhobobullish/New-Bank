@@ -52,7 +52,7 @@ const Home: React.FC = () => {
       {/* Bottom Footer */}
       <div className="w-full flex justify-center pb-10">
         <img 
-          src="/bottom.png" 
+          src="/footer.png" 
           alt="License and Insurance" 
           className="max-w-[80%] h-auto max-h-[60px]" 
         />
