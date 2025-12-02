@@ -5,10 +5,11 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Navigate to onboarding after 3 seconds (allows for 3 heartbeats)
+    // Navigate to onboarding after 4.5 seconds
+    // (Allows exactly 3 slow heartbeats at 1.5s each)
     const timer = setTimeout(() => {
       navigate('/onboarding'); 
-    }, 3000);
+    }, 4500);
 
     return () => clearTimeout(timer);
   }, [navigate]);
@@ -19,14 +20,15 @@ const Home: React.FC = () => {
       <style>{`
         @keyframes heartbeat {
           0% { transform: scale(1); }
-          15% { transform: scale(1.15); }
-          30% { transform: scale(1); }
-          45% { transform: scale(1.15); }
-          60% { transform: scale(1); }
+          14% { transform: scale(1.1); }  /* First beat (Lub) - softer scale */
+          28% { transform: scale(1); }    /* Pause */
+          42% { transform: scale(1.1); }  /* Second beat (Dub) - softer scale */
+          70% { transform: scale(1); }    /* Long Pause */
           100% { transform: scale(1); }
         }
         .animate-heartbeat {
-          animation: heartbeat 1s ease-in-out infinite;
+          /* Increased duration to 1.5s for a slower, calmer rhythm */
+          animation: heartbeat 1.5s ease-in-out infinite; 
         }
       `}</style>
 
